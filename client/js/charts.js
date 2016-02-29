@@ -1,6 +1,4 @@
 
-stats = new Mongo.Collection("stats");
-
 if (Meteor.isClient) {
 
  Template.charts.created = function() {  
@@ -71,7 +69,7 @@ if (Meteor.isClient) {
         setTimeout(function(){
         myLineChart = new Chart(template.getCanvas()).Line(template.getData(), options);
 
-        }, 100)
+        }, 1000)
       }else{
         alert("You reached the max limit 12 months. You can save this chart and make a new one.");
       }
@@ -97,7 +95,7 @@ if (Meteor.isClient) {
       setTimeout(function(){
       myLineChart.destroy();
       myLineChart = new Chart(template.getCanvas()).Line(template.getData(), options);
-      }, 100)
+      }, 3000)
     },
 
     'click .download':function(){
@@ -110,40 +108,19 @@ if (Meteor.isClient) {
   });
 
 
-Template.charts.rendered = function(){
+Template.charts.onRendered(function () {
 
   var template = Template.instance();
   setTimeout(function(){
-  myLineChart = new Chart(template.getCanvas()).Line(template.getData(), options);
-  }, 1000)
-
-}
-
-
-
-
-}
-
-
-
-if (Meteor.isServer) {
-Meteor.methods({
-
-  'removeAll':function(){
-    return stats.remove({});
-  },
-
-  'removeLast':function(){
-    var removeLast = stats.findOne({}, {sort:{$natural:-1}})
-    return stats.remove({_id:removeLast._id})
- 
-  },
-
-  'addStat':function(stat){
-    stats.insert({stat:stat});
-  }
+    myLineChart = new Chart(template.getCanvas()).Line(template.getData(), options);
+    document.getElementById('loader').className += ' hidden';
+  }, 5000)
+  
+  
 
 });
+
+
 
 
 }
