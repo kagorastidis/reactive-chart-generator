@@ -9,4 +9,4 @@ You can add and remove values and export the generated chart as png.
 <ol>
 <li><input type="checkbox" readonly">[x] Add User Accounts</li>
 <li><input type="checkbox" readonly">[ ] Find a way to export as SVG</li>
-<li><input type="checkbox" readonly">[ ] Add more chart types (bar,radar,pie etc)</li>
+<li><input type="checkbox" readonly">[x] Add more chart types (bar,radar)</li>
