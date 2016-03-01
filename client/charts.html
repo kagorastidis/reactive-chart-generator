@@ -6,52 +6,17 @@
 
 <div class="container">
 	<div class="row">
-		 {{> charts}}
+		{{> login}}
 	</div>
+	<div class="row">
+	{{#if currentUser}}
+		 {{> charts}}
+	{{else}}  
+     {{> loginMessage}}
+   {{/if}}
+	</div>
+	{{> copyright}}
 </div>
   
-
- 
 </body>
 
-<template name="charts">
-
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-<div class="well diagram">
-<canvas id="myChart" width="1003" height="400"></canvas>
-<div id="loader" class="load-wrapper">
-<div class="loader"></div>
-</div>
-</div>
-	
-</div>
-
-<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-
-<div class="well">
-	<form class="stats">
-		<legend>Statistcs</legend>
-	
-		<div class="form-group">
-			<label for="">Enter Chart value</label>
-			<input required name="stat" type="number" class="form-control " id="" placeholder="Input field">
-		</div>
-		<button type="submit" class="btn btn-success">Submit</button>
-		<button class="btn btn-primary removeLast">Remove Last</button>
-		<button class="btn btn-danger remove">Remove All</button>
-	</form>
-
-</div>
-	
-</div>
-
-<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-	<div class="well">
-		<button type="button" class="btn btn-block btn-info download">Download your chart</button>
-	</div>
-</div>
-
-
-  
-</template>
