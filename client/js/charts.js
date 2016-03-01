@@ -39,6 +39,25 @@ if (Meteor.isClient) {
 
   },
 
+  this.getChartType = function(chartType){
+    switch (chartType) {
+        case "Line":
+           myLineChart = new Chart(this.getCanvas()).Line(this.getData(), options);
+          break;
+        case "Bar":
+           myLineChart = new Chart(this.getCanvas()).Bar(this.getData(), options);
+          break;
+        case "Radar":
+           myLineChart = new Chart(this.getCanvas()).Radar(this.getData(), options);
+          break;
+        default:
+          myLineChart = new Chart(this.getCanvas()).Line(this.getData(), options);
+          console.log(chartType);
+          break;
+    }
+
+  },
+
   this.downloadChart = function download(filename) {
     var e = document.createElement('a');
     e.setAttribute('href', myLineChart.toBase64Image());
@@ -73,7 +92,7 @@ if (Meteor.isClient) {
         Meteor.call('addStat',stat,user);
         var template = Template.instance();
         setTimeout(function(){
-        myLineChart = new Chart(template.getCanvas()).Line(template.getData(), options);
+        template.getChartType(Session.get("chartType"));
 
         }, 1000)
       }else{
@@ -88,7 +107,7 @@ if (Meteor.isClient) {
       var template = Template.instance();
       setTimeout(function(){
       myLineChart.destroy();
-      myLineChart = new Chart(template.getCanvas()).Line(template.getData(), options);
+      template.getChartType(Session.get("chartType"));
       }, 1000)  
     },
 
@@ -103,9 +122,21 @@ if (Meteor.isClient) {
       template.toggleLoader();
       setTimeout(function(){
       myLineChart.destroy();
-      myLineChart = new Chart(template.getCanvas()).Line(template.getData(), options);
+      template.getChartType(Session.get("chartType"));
       template.toggleLoader();
       }, 3000)
+
+    },
+
+    'change #inputChartType':function(e){
+      e.preventDefault();
+      var template = Template.instance();
+      var value = $('#inputChartType').val();
+      Session.set("chartType",value);
+      var chartType = Session.get("chartType");
+      myLineChart.destroy();
+
+      template.getChartType(Session.get("chartType"));
 
     },
 
@@ -114,8 +145,6 @@ if (Meteor.isClient) {
       template.downloadChart('chart');
     }
 
-
-
   });
 
 
@@ -123,7 +152,7 @@ Template.charts.onRendered(function () {
   var template = Template.instance();
   setTimeout(function(){
     template.toggleLoader();
-    myLineChart = new Chart(template.getCanvas()).Line(template.getData(), options);
+    template.getChartType(Session.get("chartType"));
   }, 5000)
 
 

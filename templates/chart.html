@@ -18,7 +18,7 @@
 		<legend>Statistcs</legend>
 	
 		<div class="form-group">
-			<label for="">Enter Chart value</label>
+			<label for="stat">Enter Chart value</label>
 			<input required name="stat" type="number" class="form-control " id="" placeholder="Input field">
 		</div>
 		<button type="submit" class="btn btn-success">Submit</button>
@@ -29,7 +29,16 @@
 </div>
 	
 </div>
-
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+	<div class="well">
+		<label for="stat">Select your chart type</label>
+		<select name="chartType" id="inputChartType" class="form-control" required="required">
+			    	<option value="Line" default>Line Chart</option>
+			    	<option value="Bar">Bar Chart</option>
+			    	<option value="Radar">Radar Chart</option>
+		</select>
+	</div>
+</div>
 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 	<div class="well">
 		<button type="button" class="btn btn-block btn-info download">Download your chart</button>
