@@ -6,6 +6,7 @@ You can add and remove values and export the generated chart as png.
 
 # TODO :
 
-i) add support for multiple users
-ii) find a way to export as svg, for image scaling
-iii) add more chart types
+<ol>
+<li><input type="checkbox" readonly">[x] Add User Accounts</li>
+<li><input type="checkbox" readonly">[ ] Find a way to export as SVG</li>
+<li><input type="checkbox" readonly">[ ] Add more chart types (bar,radar,pie etc)</li>
